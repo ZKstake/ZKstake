@@ -1,0 +1,42 @@
+TESTS += zkstake-test
+bin_PROGRAMS += zkstake-test
+
+# tool for generating our public parameters
+zkstake_test_SOURCES = \
+    test-zkstake/main.cpp \
+    test-zkstake/testutils.cpp \
+    test-zkstake/test_cryptoconditions.cpp \
+    test-zkstake/test_coinimport.cpp \
+    test-zkstake/test_eval_bet.cpp \
+    test-zkstake/test_eval_notarisation.cpp \
+    test-zkstake/test_parse_notarisation.cpp \
+    test-zkstake/test_buffered_file.cpp \
+    test-zkstake/test_sha256_crypto.cpp \
+    test-zkstake/test_script_standard_tests.cpp \
+    test-zkstake/test_multisig_tests.cpp \
+    test-zkstake/test_merkle_tests.cpp \
+    test-zkstake/test_addrman.cpp \
+    test-zkstake/test_netbase_tests.cpp \
+    test-zkstake/test_events.cpp \
+    test-zkstake/test_hex.cpp \
+    test-zkstake/test_haraka_removal.cpp \
+    test-zkstake/test_oldhash_removal.cpp \
+    test-zkstake/test_kmd_feat.cpp
+
+if TARGET_WINDOWS
+zkstake_test_SOURCES += test-zkstake/zkstake-test-res.rc
+endif
+
+zkstake_test_CPPFLAGS = $(zkstaked_CPPFLAGS)
+
+zkstake_test_LDADD = -lgtest $(zkstaked_LDADD)
+
+zkstake_test_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) -static
+zkstake_test_LIBTOOLFLAGS = --tag CXX
+
+yellow := $(shell tput setaf 11)
+reset := $(shell tput sgr0)
+$(info $(yellow)[ Decker ]$(reset) Check the $(yellow)zkstake_test$(reset) dependencies ...)
+
+$(info $(yellow)$$zkstaked_LDADD$(reset) is [$(zkstaked_LDADD)])
+$(info $(yellow)$$zkstake_test_LDADD$(reset) is [${zkstake_test_LDADD}])

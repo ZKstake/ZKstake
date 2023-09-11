@@ -1,0 +1,7 @@
+#!/bin/bash
+set -eo pipefail
+zkstake_cli='./zkstake-cli'
+
+./listassetchains | while read chain; do
+  $zkstake_cli --ac_name=$chain stop
+done

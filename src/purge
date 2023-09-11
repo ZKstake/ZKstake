@@ -1,0 +1,5 @@
+rm -rf ~/.zkstake/$1/chainstate
+rm -rf ~/.zkstake/$1/database
+rm -rf ~/.zkstake/$1/blocks
+rm -rf ~/.zkstake/$1/zkstakestate
+
